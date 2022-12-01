@@ -11,10 +11,8 @@ pub fn run2() {
         if line.trim().is_empty() {
             if current > highest {
                 highest = current;
-                current = 0;
-            } else {
-                current = 0;
             }
+            current = 0;
         } else {
             current = current + line.parse::<usize>().expect("Cannot Parse Int");
         }
@@ -26,7 +24,7 @@ pub fn run2() {
 pub fn run1() {
     let result = read_input("input/day1")
         .split(|v| v.trim().is_empty())
-        .map(|snacks| snacks.iter().map(|calories| calories.parse::<usize>().expect("Cannot Parse Int")))
+        .map(|snacks| snacks.iter().map(|it|it.parse::<usize>().expect("Cannot Parse Int")))
         .fold(0, | highestTotalCalories , snacks| max(snacks.sum(), highestTotalCalories));
 
     println!("{}", result)
