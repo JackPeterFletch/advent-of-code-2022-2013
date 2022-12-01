@@ -29,3 +29,17 @@ pub fn run1() {
 
     println!("{}", result)
 }
+
+
+pub fn run3() {
+    let mut results: Vec<usize> = read_input("input/day1")
+        .split(|v| v.trim().is_empty())
+        .map(|snacks| snacks.iter().map(|it|it.parse::<usize>().expect("Cannot Parse Int")).collect::<Vec<usize>>().iter().sum())
+        .collect();
+
+    results.sort();
+
+    let total = results.pop().expect("") + results.pop().expect("") + results.pop().expect("");
+
+    println!("{}", total)
+}
