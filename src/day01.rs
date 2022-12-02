@@ -14,7 +14,7 @@ pub fn run2() {
             }
             current = 0;
         } else {
-            current = current + line.parse::<usize>().expect("Cannot Parse Int");
+            current += line.parse::<usize>().expect("Cannot Parse Int");
         }
     }
 
@@ -25,7 +25,7 @@ pub fn run1() {
     let result = read_input("input/day1")
         .split(|v| v.trim().is_empty())
         .map(|snacks| snacks.iter().map(|it|it.parse::<usize>().expect("Cannot Parse Int")))
-        .fold(0, | highestTotalCalories , snacks| max(snacks.sum(), highestTotalCalories));
+        .fold(0, |highest_total_calories, snacks| max(snacks.sum(), highest_total_calories));
 
     println!("{}", result)
 }
