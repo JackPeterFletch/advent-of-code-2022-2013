@@ -3,6 +3,7 @@ use std::collections::HashMap;
 use RockPaperScissors::*;
 use Outcome::*;
 use once_cell::sync::Lazy;
+use unwrap::unwrap;
 
 static OPPOSITION_MOVE_ENCODING: Lazy<HashMap<char, RockPaperScissors>> = Lazy::new(|| HashMap::from([('A', Rock), ('B', Paper), ('C', Scissors)]));
 static FRIENDLY_MOVE_ENCODING: Lazy<HashMap<char, RockPaperScissors>> = Lazy::new(|| HashMap::from([('X', Rock), ('Y', Paper), ('Z', Scissors)]));
@@ -13,8 +14,8 @@ pub fn part1() {
     let suggestions: Vec<(char, char)> = read_suggestions();
 
     let results = suggestions.iter()
-        .map(|encoded| (OPPOSITION_MOVE_ENCODING.get(&encoded.0).expect(""), FRIENDLY_MOVE_ENCODING.get(&encoded.1).expect("")))
-        .map(|decoded| get_outcome_score(decoded.0, decoded.1) + MOVE_SCORES.get(decoded.1).expect(""));
+        .map(|it| (unwrap!(OPPOSITION_MOVE_ENCODING.get(&it.0)), unwrap!(FRIENDLY_MOVE_ENCODING.get(&it.1))))
+        .map(|it| get_outcome_score(it.0, it.1) + unwrap!(MOVE_SCORES.get(it.1)));
 
     println!("{}", results.sum::<usize>())
 }
@@ -23,9 +24,9 @@ pub fn part2() {
     let suggested_outcomes: Vec<(char, char)> = read_suggestions();
 
     let results = suggested_outcomes.iter()
-        .map(|encoded| (OPPOSITION_MOVE_ENCODING.get(&encoded.0).expect(""), SUGGESTED_OUTCOME_ENCODING.get(&encoded.1).expect("")))
-        .map(|decoded| (decoded.0, decide_move(decoded.0, decoded.1)))
-        .map(|moves| get_outcome_score(moves.0, moves.1) + MOVE_SCORES.get(moves.1).expect(""));
+        .map(|it| (unwrap!(OPPOSITION_MOVE_ENCODING.get(&it.0)), unwrap!(SUGGESTED_OUTCOME_ENCODING.get(&it.1))))
+        .map(|it| (it.0, decide_move(it.0, it.1)))
+        .map(|it| get_outcome_score(it.0, it.1) + unwrap!(MOVE_SCORES.get(it.1)));
 
     println!("{}", results.sum::<usize>())
 }
@@ -33,7 +34,7 @@ pub fn part2() {
 fn read_suggestions() -> Vec<(char, char)> {
     read_input("input/day02")
         .iter()
-        .map(|round| round.as_bytes())
+        .map(|it| it.as_bytes())
         .map(|chars| (chars[0] as char, chars[2] as char)).collect()
 }
 
