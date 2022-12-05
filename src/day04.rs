@@ -61,18 +61,10 @@ struct Section {
 
 impl Section {
     pub fn contains(&self, other: &Section) -> bool {
-        if (self.start <= other.start) && (self.end >= other.end) {
-            true
-        } else {
-            false
-        }
+        (self.start <= other.start) && (self.end >= other.end)
     }
 
     pub fn overlaps(&self, other: &Section) -> bool {
-        if self.start <= other.end && self.end >= other.start {
-            true
-        } else {
-            false
-        }
+        self.start <= other.end && self.end >= other.start
     }
 }
