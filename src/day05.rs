@@ -1,7 +1,6 @@
 use std::collections::{HashMap, VecDeque};
 use crate::util::read_input;
 
-
 const INPUT: &str = "input/day05";
 
 #[derive(Debug, Eq, Ord, PartialEq, PartialOrd)]

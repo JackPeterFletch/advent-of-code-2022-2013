@@ -38,19 +38,11 @@ struct SectionPair {
 
 impl SectionPair {
     fn one_contains_other(&self) -> bool {
-        if self.first.contains(&self.second) || self.second.contains(&self.first) {
-            true
-        } else {
-            false
-        }
+        self.first.contains(&self.second) || self.second.contains(&self.first)
     }
 
     fn one_overlaps_other(&self) -> bool {
-        if self.first.overlaps(&self.second) {
-            true
-        } else {
-            false
-        }
+        self.first.overlaps(&self.second)
     }
 }
 
