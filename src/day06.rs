@@ -22,8 +22,9 @@ fn find_distinct_window(window_size: usize) -> usize {
             set.insert(n[i]);
         }
 
-        if starting_pos == 0 && set.len() == window_size {
-            starting_pos = pos + window_size
+        if set.len() == window_size {
+            starting_pos = pos + window_size;
+            break;
         }
     }
     starting_pos
